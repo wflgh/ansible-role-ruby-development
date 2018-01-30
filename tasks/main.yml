@@ -1,0 +1,16 @@
+---
+# tasks file for ansible-role-ruby-development
+
+- file:
+    path: /opt/test
+    state: directory
+    mode: 0644
+
+- name: ensure file exists
+  copy:
+    content: ""
+    dest: /opt/test/test.txt
+    force: no
+    group: root
+    owner: root
+    mode: 0644
