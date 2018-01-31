@@ -1,5 +1,21 @@
 ---
+
 - hosts: localhost
   remote_user: root
+  become: true
+  pre_tasks:
+    - name: create vagrant group
+      group:
+        name: vagrant
+        state: present
+
+    - name: create vagrant user
+      user:
+        name: vagrant
+        group: vagrant
+        shell: /bin/bash
+        state: present
+        createhome: yes
   roles:
-    - ansible-role-ruby-development
+    - role: ansible-role-ruby-development
+      ruby_user: vagrant

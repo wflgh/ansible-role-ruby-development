@@ -1,0 +1,6 @@
+---
+- name: install prereq packages
+  package: name={{ item }} state=present
+  with_items:
+    - "{{ ruby_build_yum_prereqs }}"
+  become: true

@@ -1,0 +1,18 @@
+---
+
+- name: install the required ruby version
+  command: "{{ rbenv_executable }} install {{ item }}"
+  become: true
+  become_user: "{{ ruby_user }}"
+  register: ruby_install_result
+  with_items:
+    - "{{ ruby_version }}"
+  when: (not ruby_installed)
+
+- name: set the ruby version in rbenv
+  command: "{{ rbenv_executable }} global {{ ruby_version }}"
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_method: sudo
+  become_flags: -Hi
+  when: ruby_version_changed or ruby_install_result|changed

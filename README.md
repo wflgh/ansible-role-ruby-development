@@ -5,30 +5,26 @@ Role Name
 
 Installs Ruby development environment
 
-Requirements
-------------
-
-tbc
-
 Role Variables
 --------------
-
-tbc
-
-Dependencies
-------------
 
 tbc
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
+      remote_user: root
+      become: true
       roles:
-         - ansible-role-ruby-development
+         - role: ansible-role-ruby-development
+           ruby_user: vagrant
 
+Supported Platforms
+-------------------
+
+* RHEL-7
+* CentOS-7
 
 Author Information
 ------------------

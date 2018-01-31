@@ -1,16 +1,27 @@
 ---
 # tasks file for ansible-role-ruby-development
 
-- file:
-    path: /opt/test
-    state: directory
-    mode: 0644
+- name: fail when ruby user is not defined
+  fail: msg="The ruby_user variable must be set."
+  when: (ruby_user is not defined) or (not ruby_user)
 
-- name: ensure file exists
-  copy:
-    content: ""
-    dest: /opt/test/test.txt
-    force: no
-    group: root
-    owner: root
-    mode: 0644
+# set facts to reliably determine os
+- name: discover operating system
+  include_tasks: discovery/os.yml
+
+# set facts to reliably determine ruby variables
+- name: discover ruby
+  include_tasks: discovery/ruby.yml
+
+# install prereqs
+- name: install RHEL prereqs
+  include_tasks: rhel_prereqs.yml
+  when: os_name == 'redhat'
+
+# install rbenv
+- name: install rbenv
+  include_tasks: rbenv.yml
+
+# install ruby
+- name: install ruby
+  include_tasks: ruby.yml

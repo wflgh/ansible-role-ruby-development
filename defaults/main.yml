@@ -1,0 +1,18 @@
+---
+# defaults file for ansible-role-ruby-development
+ruby_version: "2.4.1"
+ruby_user: "vagrant"
+
+# https://github.com/rbenv/ruby-build/wiki
+# RHEL
+ruby_build_yum_prereqs:
+  - bzip2
+  - gcc-c++
+  - gdbm-devel
+  - git-core
+  - libffi-devel
+  - libyaml-devel
+  - ncurses-devel
+  - openssl-devel
+  - readline-devel
+  - zlib-devel

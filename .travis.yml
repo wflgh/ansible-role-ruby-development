@@ -7,11 +7,12 @@ language: python
 python: "2.7"
 
 env:
-  - ANSIBLE_VERSION=latest
-#  - ANSIBLE_VERSION=2.3.0.0
-#  - ANSIBLE_VERSION=2.2.0.0
-#  - ANSIBLE_VERSION=2.1.0.0
-
+  - distribution: centos
+    version: 7
+    ansible_version: latest
+  - distribution: centos
+    version: 7
+    ansible_version: 2.3.0.0
 
 cache: pip
 
@@ -22,7 +23,7 @@ before_install:
 
 install:
   - bundle install
-  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+  - if [ "$ansible_version" = "latest" ]; then pip install ansible; else pip install ansible==$ansible_version; fi
 
 script:
   - ansible --version
